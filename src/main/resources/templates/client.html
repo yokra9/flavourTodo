@@ -14,6 +14,9 @@
       event:click="addTodo()">Add</button>
   </div>
   <ul class="space-y-3">
+    <std:if condition="todos.isEmpty()">
+      <li class="text-center text-gray-500 py-4">No tasks yet. Add one above!</li>
+    </std:if>
     <std:foreach var="todo" in="visibleTodos">
       <li class="flex items-center justify-between p-3 bg-gray-50 rounded hover:bg-gray-100">
         <div class="flex items-center">
@@ -29,11 +32,12 @@
     </std:foreach>
   </ul>
   <div class="mt-6 pt-4 border-t border-gray-200 flex justify-between items-center text-sm text-gray-600">
-    <span><html:text value="activeCount"/> items left</span>
-    <button class="text-gray-500 hover:text-red-600 transition-colors"
-            attr:class="hasCompletedItems ? '' : 'hidden'"
-            event:click="clearCompleted()">
-      Clear completed
-    </button>
+    <span>Active: <html:text value="activeCount"/> / Total: <html:text value="todos.size()"/></span>
+    <std:if condition="hasCompletedItems">
+      <button class="text-gray-500 hover:text-red-600 transition-colors"
+              event:click="clearCompleted()">
+        Clear completed
+      </button>
+    </std:if>
   </div>
 </div>
