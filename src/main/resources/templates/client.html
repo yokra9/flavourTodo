@@ -36,9 +36,12 @@
         <div class="flex items-center">
           <input type="checkbox" class="mr-3 h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
             html:checked="todo.completed" html:checked-change="todo.completed" />
-          <span attr:class="todo.completed ? 'line-through text-gray-400' : 'text-gray-800'">
-            <html:text value="todo.text" />
-          </span>
+          <div class="flex flex-col">
+            <span attr:class="todo.completed ? 'line-through text-gray-400' : 'text-gray-800'">
+              <html:text value="todo.text" />
+            </span>
+            <span class="text-xs text-gray-400"><html:text value="formatDate(todo.creationDate)"/></span>
+          </div>
         </div>
         <button class="text-red-500 hover:text-red-700 text-sm font-medium ml-2"
           event:click="deleteTodo(todo)">削除</button>

@@ -1,7 +1,11 @@
 package com.example;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 import org.teavm.flavour.templates.BindTemplate;
 import org.teavm.flavour.templates.Templates;
 
@@ -12,6 +16,8 @@ public class Client {
     private boolean hideCompleted;
 
     public static void main(String[] args) {
+        Locale.setDefault(Locale.JAPANESE);
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Tokyo"));
         Templates.bind(new Client(), "application-content");
     }
 
@@ -80,5 +86,12 @@ public class Client {
 
     public void clearCompleted() {
         todos.removeIf(Todo::isCompleted);
+    }
+
+    public String formatDate(Date date) {
+        if (date == null) return "";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault());
+        sdf.setTimeZone(TimeZone.getDefault());
+        return sdf.format(date);
     }
 }

@@ -27,4 +27,8 @@ public class Todo {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
 }
