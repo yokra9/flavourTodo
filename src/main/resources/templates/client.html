@@ -1,15 +1,23 @@
-<div>
-  <h1>ToDo List</h1>
-  <div>
-    <input type="text" html:value="newTodoText" html:change="newTodoText" placeholder="Add a new task..."/>
-    <button event:click="addTodo()">Add</button>
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">ToDo List</h1>
+  <div class="flex gap-2 mb-6">
+    <input type="text" class="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+      html:value="newTodoText" html:change="newTodoText" placeholder="Add a new task..." />
+    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+      event:click="addTodo()">Add</button>
   </div>
-  <ul>
+  <ul class="space-y-3">
     <std:foreach var="todo" in="todos">
-      <li>
-        <input type="checkbox" html:checked-change="todo.completed" />
-        <span attr:class="todo.completed ? 'completed' : ''"><html:text value="todo.text"/></span>
-        <button event:click="deleteTodo(todo)">Delete</button>
+      <li class="flex items-center justify-between p-3 bg-gray-50 rounded hover:bg-gray-100">
+        <div class="flex items-center">
+          <input type="checkbox" class="mr-3 h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
+            html:checked-change="todo.completed" />
+          <span attr:class="todo.completed ? 'line-through text-gray-400' : 'text-gray-800'">
+            <html:text value="todo.text" />
+          </span>
+        </div>
+        <button class="text-red-500 hover:text-red-700 text-sm font-medium ml-2"
+          event:click="deleteTodo(todo)">Delete</button>
       </li>
     </std:foreach>
   </ul>
