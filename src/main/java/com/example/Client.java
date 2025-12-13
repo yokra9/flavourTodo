@@ -9,6 +9,7 @@ import org.teavm.flavour.templates.Templates;
 public class Client {
     private List<Todo> todos = new ArrayList<>();
     private String newTodoText = "";
+    private boolean hideCompleted;
 
     public static void main(String[] args) {
         Templates.bind(new Client(), "application-content");
@@ -35,5 +36,26 @@ public class Client {
 
     public void deleteTodo(Todo todo) {
         todos.remove(todo);
+    }
+
+    public boolean isHideCompleted() {
+        return hideCompleted;
+    }
+
+    public void setHideCompleted(boolean hideCompleted) {
+        this.hideCompleted = hideCompleted;
+    }
+
+    public List<Todo> getVisibleTodos() {
+        if (!hideCompleted) {
+            return todos;
+        }
+        List<Todo> visibleTodos = new ArrayList<>();
+        for (Todo todo : todos) {
+            if (!todo.isCompleted()) {
+                visibleTodos.add(todo);
+            }
+        }
+        return visibleTodos;
     }
 }
