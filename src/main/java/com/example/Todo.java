@@ -1,11 +1,15 @@
 package com.example;
 
+import java.util.Date;
+
 public class Todo {
     private String text;
     private boolean completed;
+    private Date creationDate;
 
     public Todo(String text) {
         this.text = text;
+        this.creationDate = new Date();
     }
 
     public String getText() {
