@@ -1,4 +1,4 @@
-package com.example;
+package com.github.yokra9.flavourTodo;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
