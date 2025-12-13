@@ -58,4 +58,27 @@ public class Client {
         }
         return visibleTodos;
     }
+
+    public int getActiveCount() {
+        int count = 0;
+        for (Todo todo : todos) {
+            if (!todo.isCompleted()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public boolean isHasCompletedItems() {
+        for (Todo todo : todos) {
+            if (todo.isCompleted()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void clearCompleted() {
+        todos.removeIf(Todo::isCompleted);
+    }
 }
