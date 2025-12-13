@@ -6,7 +6,10 @@
   </div>
   <ul>
     <std:foreach var="todo" in="todos">
-      <li><html:text value="todo.text"/></li>
+      <li>
+        <input type="checkbox" html:checked-change="todo.completed" />
+        <span attr:class="todo.completed ? 'completed' : ''"><html:text value="todo.text"/></span>
+      </li>
     </std:foreach>
   </ul>
 </div>

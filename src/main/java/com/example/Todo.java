@@ -2,6 +2,7 @@ package com.example;
 
 public class Todo {
     private String text;
+    private boolean completed;
 
     public Todo(String text) {
         this.text = text;
@@ -13,5 +14,13 @@ public class Todo {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }
