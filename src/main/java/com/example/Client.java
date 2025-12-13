@@ -32,4 +32,8 @@ public class Client {
             newTodoText = "";
         }
     }
+
+    public void deleteTodo(Todo todo) {
+        todos.remove(todo);
+    }
 }

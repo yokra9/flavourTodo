@@ -9,6 +9,7 @@
       <li>
         <input type="checkbox" html:checked-change="todo.completed" />
         <span attr:class="todo.completed ? 'completed' : ''"><html:text value="todo.text"/></span>
+        <button event:click="deleteTodo(todo)">Delete</button>
       </li>
     </std:foreach>
   </ul>
