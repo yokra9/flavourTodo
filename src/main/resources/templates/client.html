@@ -1,64 +1,81 @@
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 py-12 px-4">
-<div class="max-w-md mx-auto p-8 bg-white rounded-3xl shadow-[0_20px_50px_rgba(8,_112,_184,_0.07)] border border-slate-100">
-  <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600 mb-8 text-center tracking-tight">ToDo リスト</h1>
-  <div class="text-center mb-8 text-sm font-medium text-slate-500 h-5">
-    <std:choose>
-      <std:option when="activeCount == 0">
-        <span>🎉 素晴らしい！全て完了です</span>
-      </std:option>
-      <std:option when="activeCount > 5">
-        <span>🔥 タスクが山積みです</span>
-      </std:option>
-      <std:otherwise>
-        <span>💪 その調子！</span>
-      </std:otherwise>
-    </std:choose>
-  </div>
-  <div class="mb-4 flex justify-end">
-    <label class="inline-flex items-center cursor-pointer text-xs font-bold text-slate-400 hover:text-blue-600 transition-colors uppercase tracking-wide">
-      <input type="checkbox" class="mr-2 rounded text-blue-600 focus:ring-blue-500 border-gray-300"
-        html:checked-change="hideCompleted" />
-      完了済みを隠す
-    </label>
-  </div>
-  <div class="flex gap-3 mb-8">
-    <input type="text" class="flex-1 px-4 py-3 bg-slate-50 border-0 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all placeholder-slate-400 text-slate-700 shadow-sm"
-      html:value="newTodoText" html:change="newTodoText" placeholder="新しいタスクを追加..." />
-    <button class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 hover:shadow-blue-300 hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none disabled:translate-y-0"
-      html:enabled="!newTodoText.isEmpty()"
-      event:click="addTodo()">追加</button>
-  </div>
-  <ul class="space-y-3">
-    <std:if condition="todos.isEmpty()">
-      <li class="text-center text-slate-400 py-8 text-sm">まだタスクがありません。<br/>上から追加してください！</li>
-    </std:if>
-    <std:foreach var="todo" in="visibleTodos">
-      <li class="group flex items-center justify-between p-4 bg-white border border-slate-100 rounded-2xl hover:border-blue-100 hover:shadow-md hover:shadow-blue-50 transition-all duration-200">
-        <div class="flex items-center">
-          <input type="checkbox" class="mr-4 h-5 w-5 text-blue-600 rounded-full border-slate-300 focus:ring-blue-500 transition-all cursor-pointer"
-            html:checked="todo.completed" html:checked-change="todo.completed" />
-          <div class="flex flex-col">
-            <span attr:class="todo.completed ? 'line-through text-slate-400 decoration-slate-300' : 'text-slate-700 font-medium'">
-              <html:text value="todo.text" />
-            </span>
-            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-1"><html:text value="formatDate(todo.creationDate)"/></span>
-          </div>
-        </div>
-        <button class="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-red-500 hover:bg-red-50 p-2 rounded-lg transition-all duration-200"
-          event:click="deleteTodo(todo)">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+  <div
+    class="max-w-md mx-auto p-4 bg-white rounded-3xl shadow-[0_20px_50px_rgba(8,_112,_184,_0.07)] border border-slate-100">
+    <h1
+      class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600 mb-8 text-center tracking-tight">
+      ToDo リスト</h1>
+    <div class="text-center mb-8 text-sm font-medium text-slate-500 h-5">
+      <std:choose>
+        <std:option when="activeCount == 0">
+          <span>🎉 素晴らしい！全て完了です</span>
+        </std:option>
+        <std:option when="activeCount > 5">
+          <span>🔥 タスクが山積みです</span>
+        </std:option>
+        <std:otherwise>
+          <span>💪 その調子！</span>
+        </std:otherwise>
+      </std:choose>
+    </div>
+    <div class="mb-4 flex justify-end">
+      <label
+        class="inline-flex items-center cursor-pointer text-xs font-bold text-slate-400 hover:text-blue-600 transition-colors uppercase tracking-wide">
+        <input type="checkbox" class="mr-2 rounded text-blue-600 focus:ring-blue-500 border-gray-300"
+          html:checked-change="hideCompleted" />
+        完了済みを隠す
+      </label>
+    </div>
+    <div class="flex gap-2 mb-8">
+      <input type="text"
+        class="flex-1 px-4 py-3 bg-slate-50 border-0 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all placeholder-slate-400 text-slate-700 shadow-sm"
+        html:value="newTodoText" html:change="newTodoText" placeholder="新しいタスクを追加..." />
+      <button
+        class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 hover:shadow-blue-300 hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none disabled:translate-y-0"
+        event:click="addTodo()">追加</button>
+    </div>
+    <ul class="space-y-3">
+      <std:if condition="todos.isEmpty()">
+        <li class="text-center text-slate-400 py-8 text-sm">まだタスクがありません。<br />上から追加してください！</li>
+      </std:if>
+      <std:foreach var="todo" in="visibleTodos">
+        <li
+          class="group flex items-center justify-between p-4 bg-white border border-slate-100 rounded-2xl hover:border-blue-100 hover:shadow-md hover:shadow-blue-50 transition-all duration-200">
+          <label class="flex items-center cursor-pointer flex-1">
+            <input type="checkbox"
+              class="mr-4 h-5 w-5 text-blue-600 rounded-full border-slate-300 focus:ring-blue-500 transition-all cursor-pointer"
+              html:checked="todo.completed" html:checked-change="todo.completed" />
+            <div class="flex flex-col">
+              <span
+                attr:class="todo.completed ? 'line-through text-slate-400 decoration-slate-300' : 'text-slate-700 font-medium'">
+                <html:text value="todo.text" />
+              </span>
+              <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">
+                <html:text value="formatDate(todo.creationDate)" />
+              </span>
+            </div>
+          </label>
+          <button class="text-slate-400 hover:text-red-500 hover:bg-red-50 p-2 rounded-lg transition-all duration-200"
+            event:click="deleteTodo(todo)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
+        </li>
+      </std:foreach>
+    </ul>
+    <div
+      class="mt-8 pt-6 border-t border-slate-100 flex justify-between items-center text-xs font-medium text-slate-400">
+      <span>未完了:
+        <html:text value="activeCount" /> / 合計:
+        <html:text value="todos.size()" />
+      </span>
+      <std:if condition="hasCompletedItems">
+        <button class="text-slate-400 hover:text-red-500 hover:underline transition-all" event:click="clearCompleted()">
+          完了済みを削除
         </button>
-      </li>
-    </std:foreach>
-  </ul>
-  <div class="mt-8 pt-6 border-t border-slate-100 flex justify-between items-center text-xs font-medium text-slate-400">
-    <span>未完了: <html:text value="activeCount"/> / 合計: <html:text value="todos.size()"/></span>
-    <std:if condition="hasCompletedItems">
-      <button class="text-slate-400 hover:text-red-500 hover:underline transition-all"
-              event:click="clearCompleted()">
-        完了済みを削除
-      </button>
-    </std:if>
+      </std:if>
+    </div>
   </div>
-</div>
 </div>

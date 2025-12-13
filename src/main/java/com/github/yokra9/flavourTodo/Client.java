@@ -89,7 +89,8 @@ public class Client {
     }
 
     public String formatDate(Date date) {
-        if (date == null) return "";
+        if (date == null)
+            return "";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault());
         sdf.setTimeZone(TimeZone.getDefault());
         return sdf.format(date);
