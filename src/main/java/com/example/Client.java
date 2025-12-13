@@ -1,22 +1,35 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.teavm.flavour.templates.BindTemplate;
-import org.teavm.flavour.widgets.ApplicationTemplate;
+import org.teavm.flavour.templates.Templates;
 
 @BindTemplate("templates/client.html")
-public class Client extends ApplicationTemplate {
-    private String userName = "";
+public class Client {
+    private List<Todo> todos = new ArrayList<>();
+    private String newTodoText = "";
 
     public static void main(String[] args) {
-        Client client = new Client();
-        client.bind("application-content");
+        Templates.bind(new Client(), "application-content");
     }
 
-    public String getUserName() {
-        return userName;
+    public List<Todo> getTodos() {
+        return todos;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getNewTodoText() {
+        return newTodoText;
+    }
+
+    public void setNewTodoText(String newTodoText) {
+        this.newTodoText = newTodoText;
+    }
+
+    public void addTodo() {
+        if (newTodoText != null && !newTodoText.trim().isEmpty()) {
+            todos.add(new Todo(newTodoText));
+            newTodoText = "";
+        }
     }
 }

@@ -1,8 +1,12 @@
 <div>
-  <label>Please, enter your name</label>:
-  <input type="text" html:value="userName" html:change="userName"/>
-</div>
-
-<div>
-  Hello, <i><html:text value="userName"/></i>
+  <h1>ToDo List</h1>
+  <div>
+    <input type="text" html:value="newTodoText" html:change="newTodoText" placeholder="Add a new task..."/>
+    <button event:click="addTodo()">Add</button>
+  </div>
+  <ul>
+    <std:foreach var="todo" in="todos">
+      <li><html:text value="todo.text"/></li>
+    </std:foreach>
+  </ul>
 </div>
