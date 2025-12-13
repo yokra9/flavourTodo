@@ -1,6 +1,6 @@
 # flavourTodo
 
-[flavour](Flavour) / [TeaVM](https://www.teavm.org/) を利用した ToDo アプリのサンプルです。
+[flavour](https://flavour.sourceforge.io/) / [TeaVM](https://www.teavm.org/) を利用した ToDo アプリのサンプルです。
 
 ```bash
 # コンパイル
