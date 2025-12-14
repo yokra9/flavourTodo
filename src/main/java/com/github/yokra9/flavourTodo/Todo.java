@@ -1,15 +1,15 @@
 package com.github.yokra9.flavourTodo;
 
-import java.util.Date;
+import java.time.Instant;
 
 public class Todo {
     private String text;
     private boolean completed;
-    private Date creationDate;
+    private Instant creationDate;
 
     public Todo(String text) {
         this.text = text;
-        this.creationDate = new Date();
+        this.creationDate = Instant.now();
     }
 
     public String getText() {
@@ -28,7 +28,7 @@ public class Todo {
         this.completed = completed;
     }
 
-    public Date getCreationDate() {
+    public Instant getCreationDate() {
         return creationDate;
     }
 }

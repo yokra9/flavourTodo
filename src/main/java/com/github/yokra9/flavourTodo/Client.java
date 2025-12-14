@@ -1,10 +1,10 @@
 package com.github.yokra9.flavourTodo;
 
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.TimeZone;
 import org.teavm.flavour.templates.BindTemplate;
 import org.teavm.flavour.templates.Templates;
@@ -14,9 +14,10 @@ public class Client {
     private List<Todo> todos = new ArrayList<>();
     private String newTodoText = "";
     private boolean hideCompleted;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
+            .withZone(ZoneId.systemDefault());
 
     public static void main(String[] args) {
-        Locale.setDefault(Locale.JAPANESE);
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Tokyo"));
         Templates.bind(new Client(), "application-content");
     }
@@ -88,11 +89,9 @@ public class Client {
         todos.removeIf(Todo::isCompleted);
     }
 
-    public String formatDate(Date date) {
+    public String formatDate(Instant date) {
         if (date == null)
             return "";
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
-        sdf.setTimeZone(TimeZone.getDefault());
-        return sdf.format(date);
+        return formatter.format(date);
     }
 }
