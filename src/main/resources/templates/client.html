@@ -25,14 +25,6 @@
         </std:otherwise>
       </std:choose>
     </div>
-    <div class="mb-4 flex justify-end">
-      <label
-        class="inline-flex items-center cursor-pointer text-xs font-bold text-slate-400 hover:text-blue-600 transition-colors uppercase tracking-wide">
-        <input type="checkbox" class="mr-2 rounded text-blue-600 focus:ring-blue-500 border-gray-300"
-          html:checked-change="hideCompleted" />
-        完了済みを隠す
-      </label>
-    </div>
     <div class="flex gap-2 mb-8">
       <input type="text"
         class="flex-1 px-4 py-3 bg-slate-50 border-0 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all placeholder-slate-400 text-slate-700 shadow-sm"
@@ -69,17 +61,39 @@
         </li>
       </std:foreach>
     </ul>
-    <div
-      class="mt-8 pt-6 border-t border-slate-100 flex justify-between items-center text-xs font-medium text-slate-400">
+    <div class="mt-8 pt-6 border-t border-slate-100 mb-4 flex justify-end">
+      <std:if condition="hasCompletedItems">
+        <label
+          class="inline-flex items-center cursor-pointer text-xs font-bold text-slate-400 hover:text-blue-600 transition-colors uppercase tracking-wide mr-2">
+          <input type="checkbox" class="mr-2 rounded text-blue-600 focus:ring-blue-500 border-gray-300"
+            html:checked-change="hideCompleted" />
+          完了済みを隠す
+        </label>
+        <button
+          class="inline-flex items-center cursor-pointer text-xs font-bold text-slate-400 hover:text-blue-600 transition-colors uppercase tracking-wide"
+          event:click="clearCompleted()">
+          <img class="mr-2" src="https://icongr.am/fontawesome/trash.svg?size=16&color=8D9DB2" alt="削除">
+          完了済みを削除
+        </button>
+      </std:if>
+    </div>
+    <div class="flex justify-between items-center text-xs font-medium text-slate-400">
       <span>未完了:
         <html:text value="activeCount" /> / 合計:
         <html:text value="todos.size()" />
       </span>
-      <std:if condition="hasCompletedItems">
-        <button class="text-slate-400 hover:text-red-500 hover:underline transition-all" event:click="clearCompleted()">
-          完了済みを削除
-        </button>
-      </std:if>
+      <std:with var="percent" value="todos.isEmpty() ? 0 : (todos.size() - activeCount) * 100 / todos.size()">
+        <div class="relative w-8 h-8">
+          <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36" attr:aria-label="'消化率 ' + percent + ' %'">
+            <path class="text-slate-100"
+              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none"
+              stroke="currentColor" stroke-width="4" />
+            <path class="text-blue-500 transition-all duration-500 ease-out"
+              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none"
+              stroke="currentColor" stroke-width="4" stroke-linecap="round" attr:stroke-dasharray="percent + ', 100'" />
+          </svg>
+        </div>
+      </std:with>
     </div>
     <div class="mt-8 flex justify-center">
       <div class="group relative outline-none" tabindex="0">
