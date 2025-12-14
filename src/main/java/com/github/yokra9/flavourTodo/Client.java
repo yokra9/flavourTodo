@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.stream.Collectors;
 import org.teavm.flavour.templates.BindTemplate;
 import org.teavm.flavour.templates.Templates;
 
@@ -57,32 +58,19 @@ public class Client {
         if (!hideCompleted) {
             return todos;
         }
-        List<Todo> visibleTodos = new ArrayList<>();
-        for (Todo todo : todos) {
-            if (!todo.isCompleted()) {
-                visibleTodos.add(todo);
-            }
-        }
-        return visibleTodos;
+        return todos.stream()
+                .filter(todo -> !todo.isCompleted())
+                .collect(Collectors.toList());
     }
 
     public int getActiveCount() {
-        int count = 0;
-        for (Todo todo : todos) {
-            if (!todo.isCompleted()) {
-                count++;
-            }
-        }
-        return count;
+        return (int) todos.stream()
+                .filter(todo -> !todo.isCompleted())
+                .count();
     }
 
     public boolean isHasCompletedItems() {
-        for (Todo todo : todos) {
-            if (todo.isCompleted()) {
-                return true;
-            }
-        }
-        return false;
+        return todos.stream().anyMatch(Todo::isCompleted);
     }
 
     public void clearCompleted() {
