@@ -87,9 +87,9 @@
               <targetDirectory>${project.build.directory}/generated/js/teavm</targetDirectory>
               <mainClass>com.github.yokra9.flavourTodo.Client</mainClass>
               <minifying>true</minifying>
-              <debugInformationGenerated>true</debugInformationGenerated>
-              <sourceMapsGenerated>true</sourceMapsGenerated>
-              <sourceFilesCopied>true</sourceFilesCopied>
+              <debugInformationGenerated>false</debugInformationGenerated>
+              <sourceMapsGenerated>false</sourceMapsGenerated>
+              <sourceFilesCopied>false</sourceFilesCopied>
               <optimizationLevel>ADVANCED</optimizationLevel>
             </configuration>
           </execution>
